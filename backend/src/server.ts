@@ -1,11 +1,11 @@
 import Fastify from 'fastify'
 
-import { Route } from './routes'
+import { EventsRoutes } from './routes/events.route'
 
 const app = Fastify()
 const PORT = 3333 || process.env.PORT
 
-app.register(Route)
+app.register(EventsRoutes)
 
 app
   .listen({
