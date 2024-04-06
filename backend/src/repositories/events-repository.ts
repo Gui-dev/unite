@@ -5,6 +5,16 @@ import { type ICreateEvent } from '../dtos/create-event'
 import { prisma } from '../lib/prisma'
 
 export class EventRepository implements IEventRepository {
+  public async findEventBySlug(slug: string): Promise<Event | null> {
+    const event = await prisma.event.findUnique({
+      where: {
+        slug,
+      },
+    })
+
+    return event
+  }
+
   public async create({
     title,
     details,
