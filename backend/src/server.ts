@@ -1,17 +1,13 @@
 import Fastify from 'fastify'
-import {
-  serializerCompiler,
-  validatorCompiler,
-} from 'fastify-type-provider-zod'
 
-import { EventsRoutes } from './routes/events.route'
+import { createEventRoute } from './routes/create-event.route'
+import { registerForEventRoute } from './routes/register-for-event.route'
 
 const app = Fastify()
 const PORT = 3333 || process.env.PORT
 
-app.setValidatorCompiler(validatorCompiler)
-app.setSerializerCompiler(serializerCompiler)
-app.register(EventsRoutes)
+app.register(createEventRoute)
+app.register(registerForEventRoute)
 
 app
   .listen({
