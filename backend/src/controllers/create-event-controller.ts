@@ -1,14 +1,16 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify'
 
 import { CreateEventUseCase } from '../use-case/create-event-use-case'
+import { createEventValidation } from '../validations/create-event-validation'
 
-export class EventController {
+export class CreateEventController {
   public async store(
     request: FastifyRequest,
     reply: FastifyReply,
   ): Promise<FastifyReply> {
-    // @ts-expect-error
-    const { title, details, maximum_attendees } = request.body
+    const { title, details, maximum_attendees } = createEventValidation.parse(
+      request.body,
+    )
 
     const createEventUseCase = new CreateEventUseCase()
     const event = await createEventUseCase.execute({
