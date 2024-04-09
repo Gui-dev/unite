@@ -5,7 +5,3 @@ export const createEventValidation = z.object({
   details: z.string().nullable(),
   maximum_attendees: z.coerce.number().int().positive().nullable(),
 })
-
-export const createEventValidationResponse = z.object({
-  event_id: z.string().cuid(),
-})
