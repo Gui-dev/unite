@@ -16,3 +16,6 @@ Content-Type: application/json
   "name": "Bruce Wayne",
   "email": "bruce@email.com"
 }
+
+###
+GET http://localhost:3333/events/clus2aqie00006voabebz403s
