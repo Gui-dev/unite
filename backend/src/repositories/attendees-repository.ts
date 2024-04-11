@@ -14,6 +14,7 @@ export class AttendeesRepository implements IAttendeesRepositoryContract {
         id: attendee_id,
       },
       select: {
+        id: true,
         name: true,
         email: true,
         event: {

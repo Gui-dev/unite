@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client'
 const findAttendeeByIdResponse = Prisma.validator<Prisma.AttendeeDefaultArgs>()(
   {
     select: {
+      id: true,
       name: true,
       email: true,
       event: {

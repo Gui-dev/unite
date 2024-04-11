@@ -5,8 +5,12 @@ export const getAttendeeBadgeValidation = z.object({
 })
 
 export const getAttendeeBadgeValidationResponse = z.object({
-  name: z.string(),
-  email: z.string().email(),
+  badge: z.object({
+    name: z.string(),
+    email: z.string().email(),
+    event_title: z.string(),
+    check_in_url: z.string().url(),
+  }),
 })
 
 export type GetAttendeeBadgeValidationResponse = z.infer<

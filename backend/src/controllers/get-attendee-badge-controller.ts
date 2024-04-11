@@ -9,8 +9,8 @@ export class GetAttendeeBadgeController {
   ): Promise<FastifyReply> {
     const { attendee_id } = getAttendeeBadgeValidation.parse(request.params)
     const getAttendeeBadgeUseCase = new GetAttendeeBadgeUseCase()
-    const attendee = await getAttendeeBadgeUseCase.execute(attendee_id)
+    const { badge } = await getAttendeeBadgeUseCase.execute(attendee_id)
 
-    return reply.status(200).send({ attendee })
+    return reply.status(200).send({ badge })
   }
 }

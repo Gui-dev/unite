@@ -19,12 +19,23 @@ export class GetAttendeeBadgeUseCase {
       throw new Error('Attendee not found')
     }
 
+    const base_url = process.env.BASE_URL
+    const check_in_url = new URL(
+      `/attendees/${attendee_result.id}/check-in`,
+      base_url,
+    )
+
     const attendee = {
       name: attendee_result.name,
       email: attendee_result.email,
-      event: attendee_result.event.title,
+      event_title: attendee_result.event.title,
+      check_in_url: check_in_url.toString(),
     }
 
-    return attendee
+    return {
+      badge: {
+        ...attendee,
+      },
+    }
   }
 }
