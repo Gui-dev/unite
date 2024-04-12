@@ -22,3 +22,8 @@ GET http://localhost:3333/events/clus2aqie00006voabebz403s
 
 ###
 GET http://localhost:3333/attendees/1/badge
+
+
+###
+GET http://localhost:3333/attendees/1/check-in
+

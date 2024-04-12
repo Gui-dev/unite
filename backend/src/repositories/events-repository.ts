@@ -1,6 +1,6 @@
 import { type Event } from '@prisma/client'
 
-import { type IEventRepository } from '../contracts/event-repository'
+import { type IEventRepository } from '../contracts/event-repository-contract'
 import { type ICreateEvent } from '../dtos/create-event'
 import { prisma } from '../lib/prisma'
 import { type GetEventValidationResponseRepository } from '../validations/get-event-validation'
