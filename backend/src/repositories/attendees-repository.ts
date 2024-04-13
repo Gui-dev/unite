@@ -4,8 +4,47 @@ import { type IRegisterForEventDTO } from '../dtos/register-for-event-DTO'
 import { prisma } from '../lib/prisma'
 import { type IFindAttendeeByIdAndEmail } from '../dtos/find-attendee-DTO'
 import { type FindAttendeeByIdResponse } from '../types/find-attendee-by-id-response'
+import { type IGetEventAttendeesDTO } from '../dtos/get-event-attendees-DTO'
+import { type GetEventAttendeesResponse } from '../types/get-event-attendes-response'
 
 export class AttendeesRepository implements IAttendeesRepositoryContract {
+  public async find({
+    event_id,
+    query,
+    page_index,
+  }: IGetEventAttendeesDTO): Promise<GetEventAttendeesResponse[]> {
+    const attendees = await prisma.attendee.findMany({
+      where: query
+        ? {
+            event_id,
+            name: {
+              contains: query,
+            },
+          }
+        : {
+            event_id,
+          },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        created_at: true,
+        check_in: {
+          select: {
+            created_at: true,
+          },
+        },
+      },
+      take: 10,
+      skip: page_index * 10,
+      orderBy: {
+        created_at: 'desc',
+      },
+    })
+
+    return attendees
+  }
+
   public async findAttendeeById(
     attendee_id: number,
   ): Promise<FindAttendeeByIdResponse | null> {
