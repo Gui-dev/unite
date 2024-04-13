@@ -1,11 +1,11 @@
 import { type Event } from '@prisma/client'
 import { type ICreateEvent } from '../dtos/create-event'
-import { type GetEventValidationResponse } from '../validations/get-event-validation'
+import { type GetEventValidationResponseRepository } from '../validations/get-event-validation'
 
 export interface IEventRepository {
   create: (data: ICreateEvent) => Promise<Event>
   findEventById: (
     event_id: string,
-  ) => Promise<GetEventValidationResponse | null>
+  ) => Promise<GetEventValidationResponseRepository | null>
   findEventBySlug: (slug: string) => Promise<Event | null>
 }

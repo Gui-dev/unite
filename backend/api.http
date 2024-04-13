@@ -27,3 +27,9 @@ GET http://localhost:3333/attendees/1/badge
 ###
 GET http://localhost:3333/attendees/1/check-in
 
+
+###
+GET http://localhost:3333/events/clumdfav70000246696p1b74h/attendees
+
+###
+GET http://localhost:3333/events/clumdfav70000246696p1b74h/attendees?query=bruce
