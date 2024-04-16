@@ -1,4 +1,5 @@
 import { type ICheckInRepository } from '../contracts/check-in-reposiory-contract'
+import { BadRequest } from '../error/_erros/bad-request'
 import { CheckInRepository } from '../repositories/check-in-repository'
 
 interface ICheckInUseCase {
@@ -17,7 +18,7 @@ export class CheckInUseCase {
       await this.check_in_repository.findCheckInByAttendeeId(attendee_id)
 
     if (attendee_check_in) {
-      throw new Error('Attendee already checked in!')
+      throw new BadRequest('Attendee already checked in!')
     }
 
     await this.check_in_repository.create({ attendee_id })

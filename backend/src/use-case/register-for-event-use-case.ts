@@ -1,6 +1,7 @@
 import { type IAttendeesRepositoryContract } from '../contracts/attendees-repository-contract'
 import { type IEventRepository } from '../contracts/event-repository-contract'
 import { type IRegisterForEventDTO } from '../dtos/register-for-event-DTO'
+import { BadRequest } from '../error/_erros/bad-request'
 import { AttendeesRepository } from '../repositories/attendees-repository'
 import { EventRepository } from '../repositories/events-repository'
 import { type RegisterForEventValidationResponse } from './../validations/register-for-event-validation'
@@ -26,7 +27,7 @@ export class RegisterForEventUseCase {
       })
 
     if (attendee_exists) {
-      throw new Error('This e-mail is already registered for this event')
+      throw new BadRequest('This e-mail is already registered for this event')
     }
 
     const [event, amountOfAttendeesForEvent] = await Promise.all([
@@ -38,7 +39,7 @@ export class RegisterForEventUseCase {
       event?.maximum_attendees &&
       amountOfAttendeesForEvent >= event?.maximum_attendees
     ) {
-      throw new Error(
+      throw new BadRequest(
         'The maximum number of attendees for this event has been reached',
       )
     }
@@ -50,7 +51,7 @@ export class RegisterForEventUseCase {
     })
 
     if (!attendee) {
-      throw new Error('Error to register attendee')
+      throw new BadRequest('Error to register attendee')
     }
 
     return {

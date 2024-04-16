@@ -2,14 +2,14 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-  "title": "New Event 2",
+  "title": 123,
   "details": "Esse evento é só para um participante 😂",
   "maximum_attendees": 1
 }
 
 ###
 
-POST http://localhost:3333/events/clus2aqie00006voabebz403s/attendees
+POST http://localhost:3333/events/clv21xmnd000014ijykhwdyvp/attendees
 Content-Type: application/json
 
 {
@@ -18,14 +18,14 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3333/events/clus2aqie00006voabebz403s
+GET http://localhost:3333/events/clv21xmnd000014ijykhwdyvp
 
 ###
-GET http://localhost:3333/attendees/1/badge
+GET http://localhost:3333/attendees/5/badge
 
 
 ###
-GET http://localhost:3333/attendees/1/check-in
+GET http://localhost:3333/attendees/5/check-in
 
 
 ###

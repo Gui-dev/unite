@@ -1,4 +1,5 @@
 import { type IEventRepository } from '../contracts/event-repository-contract'
+import { BadRequest } from '../error/_erros/bad-request'
 import { EventRepository } from '../repositories/events-repository'
 import { type GetEventValidationResponseUseCase } from '../validations/get-event-validation'
 
@@ -19,7 +20,7 @@ export class GetEventUseCase {
     const event_result = await this.events_repository.findEventById(event_id)
 
     if (!event_result) {
-      throw new Error('Event not found')
+      throw new BadRequest('Event not found')
     }
 
     const event = {

@@ -1,4 +1,5 @@
 import { type IAttendeesRepositoryContract } from '../contracts/attendees-repository-contract'
+import { BadRequest } from '../error/_erros/bad-request'
 import { AttendeesRepository } from '../repositories/attendees-repository'
 import { type GetAttendeeBadgeValidationResponse } from '../validations/get-attendee-badge-validation'
 
@@ -16,7 +17,7 @@ export class GetAttendeeBadgeUseCase {
       await this.attendee_repository.findAttendeeById(attendee_id)
 
     if (!attendee_result) {
-      throw new Error('Attendee not found')
+      throw new BadRequest('Attendee not found')
     }
 
     const base_url = process.env.BASE_URL

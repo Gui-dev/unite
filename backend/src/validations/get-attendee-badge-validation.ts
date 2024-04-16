@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const getAttendeeBadgeValidation = z.object({
-  attendee_id: z.string().transform(Number),
+  attendee_id: z.coerce.number().int(),
 })
 
 export const getAttendeeBadgeValidationResponse = z.object({

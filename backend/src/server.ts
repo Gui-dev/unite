@@ -13,6 +13,7 @@ import { getEventRoute } from './routes/get-event.route'
 import { getAttendeeBadgeRoute } from './routes/get-attendee-badge.route'
 import { checkInRoute } from './routes/check-in.route'
 import { getEventAttendeesRoute } from './routes/get-event-attendees.route'
+import { error_handler } from './error/error-handler'
 
 const app = Fastify()
 const PORT = 3333 || process.env.PORT
@@ -43,6 +44,8 @@ app.register(getEventRoute)
 app.register(getAttendeeBadgeRoute)
 app.register(checkInRoute)
 app.register(getEventAttendeesRoute)
+
+app.setErrorHandler(error_handler)
 
 app
   .listen({

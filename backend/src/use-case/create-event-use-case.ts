@@ -4,6 +4,7 @@ import { type ICreateEvent } from '../dtos/create-event'
 import { type IEventRepository } from '../contracts/event-repository-contract'
 import { EventRepository } from '../repositories/events-repository'
 import { slugify } from '../utils/generate-slug'
+import { BadRequest } from '../error/_erros/bad-request'
 
 export class CreateEventUseCase {
   public eventRepository: IEventRepository
@@ -21,7 +22,7 @@ export class CreateEventUseCase {
       await this.eventRepository.findEventBySlug(slug)
 
     if (event_with_same_slug) {
-      throw new Error('Another event  with same title already exists')
+      throw new BadRequest('Another event  with same title already exists')
     }
 
     const event = await this.eventRepository.create({
@@ -32,7 +33,7 @@ export class CreateEventUseCase {
     })
 
     if (!event) {
-      throw new Error('Something wrong to create a event')
+      throw new BadRequest('Something wrong to create a event')
     }
 
     return event
