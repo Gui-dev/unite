@@ -6,6 +6,7 @@ import {
   validatorCompiler,
   jsonSchemaTransform,
 } from 'fastify-type-provider-zod'
+import fastifyCors from '@fastify/cors'
 
 import { createEventRoute } from './routes/create-event.route'
 import { registerForEventRoute } from './routes/register-for-event.route'
@@ -21,6 +22,9 @@ const PORT = 3333 || process.env.PORT
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
+app.register(fastifyCors, {
+  origin: '*',
+})
 app.register(fastifySwagger, {
   swagger: {
     consumes: ['application/json'],
