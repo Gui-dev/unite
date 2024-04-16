@@ -1,5 +1,5 @@
 import { type IAttendeesRepositoryContract } from '../contracts/attendees-repository-contract'
-import { type IEventRepository } from '../contracts/event-repository'
+import { type IEventRepository } from '../contracts/event-repository-contract'
 import { type IRegisterForEventDTO } from '../dtos/register-for-event-DTO'
 import { AttendeesRepository } from '../repositories/attendees-repository'
 import { EventRepository } from '../repositories/events-repository'

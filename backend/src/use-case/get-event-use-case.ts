@@ -1,4 +1,4 @@
-import { type IEventRepository } from '../contracts/event-repository'
+import { type IEventRepository } from '../contracts/event-repository-contract'
 import { EventRepository } from '../repositories/events-repository'
 import { type GetEventValidationResponseUseCase } from '../validations/get-event-validation'
 

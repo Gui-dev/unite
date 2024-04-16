@@ -4,7 +4,7 @@ export const checkInValidation = z.object({
   attendee_id: z.string().transform(Number),
 })
 
-const checkInValidationResponse = z.object({
+export const checkInValidationResponse = z.object({
   badge: z.object({
     name: z.string(),
     email: z.string().email(),

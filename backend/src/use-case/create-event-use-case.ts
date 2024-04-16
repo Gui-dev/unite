@@ -1,7 +1,7 @@
 import { type Event } from '@prisma/client'
 
 import { type ICreateEvent } from '../dtos/create-event'
-import { type IEventRepository } from '../contracts/event-repository'
+import { type IEventRepository } from '../contracts/event-repository-contract'
 import { EventRepository } from '../repositories/events-repository'
 import { slugify } from '../utils/generate-slug'
 
