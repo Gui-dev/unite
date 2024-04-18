@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const Header = () => {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-5 py-2">
       <svg
         width="32"
         height="32"
