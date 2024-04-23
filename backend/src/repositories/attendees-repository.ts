@@ -36,7 +36,7 @@ export class AttendeesRepository implements IAttendeesRepositoryContract {
         },
       },
       take: 10,
-      skip: page_index * 10,
+      skip: page_index ? page_index * 10 : 0 * 10,
       orderBy: {
         created_at: 'desc',
       },

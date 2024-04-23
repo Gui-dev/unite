@@ -17,8 +17,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/node": "^20.12.4",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "dayjs": "^1.11.10",
     "eslint": "^8.0.1",
     "eslint-config-love": "^44.0.0",
     "eslint-config-prettier": "^9.1.0",

@@ -14,14 +14,15 @@ export class GetEvenAttendeeUsecase {
     event_id,
     query,
     page_index,
-  }: IGetEventAttendeesDTO): Promise<
-    GetEventAttendeesValidationResponseUseCase[]
-  > {
-    const attendees_result = await this.attendees_repository.find({
-      event_id,
-      query,
-      page_index,
-    })
+  }: IGetEventAttendeesDTO): Promise<GetEventAttendeesValidationResponseUseCase> {
+    const [attendees_result, total] = await Promise.all([
+      this.attendees_repository.find({
+        event_id,
+        query,
+        page_index,
+      }),
+      this.attendees_repository.amountOfAttendeesForEvent(event_id),
+    ])
 
     const attendees = attendees_result.map((attendee) => {
       return {
@@ -33,6 +34,9 @@ export class GetEvenAttendeeUsecase {
       }
     })
 
-    return attendees
+    return {
+      attendees,
+      total,
+    }
   }
 }

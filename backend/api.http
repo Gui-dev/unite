@@ -29,7 +29,7 @@ GET http://localhost:3333/attendees/5/check-in
 
 
 ###
-GET http://localhost:3333/events/clumdfav70000246696p1b74h/attendees
+GET http://localhost:3333/events/clv21xmnd000014ijykhwdyvp/attendees
 
 ###
-GET http://localhost:3333/events/clumdfav70000246696p1b74h/attendees?query=bruce
+GET http://localhost:3333/events/clv21xmnd000014ijykhwdyvp/attendees?query=bruce

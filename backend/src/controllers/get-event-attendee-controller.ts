@@ -21,6 +21,6 @@ export class GetEventAttendeeControler {
       page_index,
     })
 
-    return reply.status(200).send({ attendees })
+    return reply.status(200).send(attendees)
   }
 }
