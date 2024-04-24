@@ -5,6 +5,7 @@ import logo from '@/assets/logo.png'
 import './../styles/global.css'
 import { Input } from '@/components/input'
 import colors from 'tailwindcss/colors'
+import { Button } from '@/components/button'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           />
           <Input.Field placeholder="Código do ingresso" />
         </Input>
+        <Button title="Acessar credencial" />
       </View>
     </View>
   )
