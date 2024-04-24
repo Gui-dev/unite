@@ -1,3 +1,4 @@
+import { View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Slot } from 'expo-router'
 import {
@@ -7,7 +8,8 @@ import {
   useFonts,
 } from '@expo-google-fonts/roboto'
 
-import './../styles/global.css'
+import { Loading } from '@/components/loading'
+import '@/styles/global.css'
 
 const Layout = () => {
   const [isFontsLoaded] = useFonts({
@@ -17,7 +19,11 @@ const Layout = () => {
   })
 
   if (!isFontsLoaded) {
-    return
+    return (
+      <View className="flex-1 items-center justify-center bg-green-500">
+        <Loading />
+      </View>
+    )
   }
 
   return (
