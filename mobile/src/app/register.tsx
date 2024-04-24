@@ -1,5 +1,5 @@
 import { Image, View } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome6, MaterialIcons } from '@expo/vector-icons'
 import { Link } from 'expo-router'
 
 import logo from '@/assets/logo.png'
@@ -8,7 +8,7 @@ import { Input } from '@/components/input'
 import colors from 'tailwindcss/colors'
 import { Button } from '@/components/button'
 
-const App = () => {
+const Register = () => {
   return (
     <View className="flex-1 items-center justify-center bg-green-500 p-8">
       <Image
@@ -19,23 +19,32 @@ const App = () => {
       />
       <View className="mt-12 w-full gap-3">
         <Input>
-          <MaterialCommunityIcons
-            name="ticket-confirmation-outline"
+          <FontAwesome6
+            name="user-circle"
             color={colors.green[200]}
             size={20}
           />
-          <Input.Field placeholder="Código do ingresso" />
+          <Input.Field placeholder="Nome completo" />
         </Input>
-        <Button title="Acessar credencial" />
+        <Input>
+          <MaterialIcons
+            name="alternate-email"
+            color={colors.green[200]}
+            size={20}
+          />
+          <Input.Field placeholder="Seu E-mail" keyboardType="email-address" />
+        </Input>
+
+        <Button title="Realizar inscrição" />
         <Link
-          href="/register"
+          href="/"
           className="mt-8 text-center font-bold text-base text-gray-100"
         >
-          Ainda não possui ingresso?
+          Já possui ingresso?
         </Link>
       </View>
     </View>
   )
 }
 
-export default App
+export default Register
