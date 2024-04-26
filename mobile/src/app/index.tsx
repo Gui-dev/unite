@@ -1,14 +1,23 @@
-import { Image, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Link } from 'expo-router'
+import { useState } from 'react'
+import colors from 'tailwindcss/colors'
 
 import logo from '@/assets/logo.png'
-import './../styles/global.css'
 import { Input } from '@/components/input'
-import colors from 'tailwindcss/colors'
 import { Button } from '@/components/button'
 
 const App = () => {
+  const [code, setCode] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleAccessCredential = () => {
+    if (!code.trim()) {
+      return setMessage('Informe o código do ingresso')
+    }
+  }
+
   return (
     <View className="flex-1 items-center justify-center bg-green-500 p-8">
       <Image
@@ -24,9 +33,14 @@ const App = () => {
             color={colors.green[200]}
             size={20}
           />
-          <Input.Field placeholder="Código do ingresso" />
+          <Input.Field
+            placeholder="Código do ingresso"
+            value={code}
+            onChangeText={setCode}
+          />
         </Input>
-        <Button title="Acessar credencial" />
+        {message && <Text className="text-sm text-red-400">{message}</Text>}
+        <Button title="Acessar credencial" onPress={handleAccessCredential} />
         <Link
           href="/register"
           className="mt-8 text-center font-bold text-base text-gray-100"
