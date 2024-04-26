@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Alert,
+  Modal,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
 import * as ImagePicker from 'expo-image-picker'
@@ -7,9 +14,11 @@ import * as ImagePicker from 'expo-image-picker'
 import { Credential } from '@/components/credential'
 import { Header } from '@/components/header'
 import { Button } from '@/components/button'
+import { QRCode } from '@/components/qrcode'
 
 const Ticket = () => {
   const [image, setImage] = useState('')
+  const [showQRCode, setShowQRCode] = useState(false)
 
   const handleSelectImage = async () => {
     try {
@@ -27,6 +36,10 @@ const Ticket = () => {
     }
   }
 
+  const handleShowQRCode = () => {
+    setShowQRCode(!showQRCode)
+  }
+
   return (
     <View className="flex-1 bg-green-500">
       <Header title="Minha credencial" />
@@ -35,7 +48,11 @@ const Ticket = () => {
         contentContainerClassName="px-8 pb-8"
         showsVerticalScrollIndicator={false}
       >
-        <Credential image={image} onChangeAvatar={handleSelectImage} />
+        <Credential
+          image={image}
+          onChangeAvatar={handleSelectImage}
+          onShowQRCode={handleShowQRCode}
+        />
         <FontAwesome
           name="angle-double-down"
           color={colors.gray[300]}
@@ -57,6 +74,23 @@ const Ticket = () => {
           </Text>
         </TouchableOpacity>
       </ScrollView>
+      <Modal
+        visible={showQRCode}
+        statusBarTranslucent
+        animationType="slide"
+        className="relative"
+      >
+        <View className="flex-1 items-center justify-center bg-green-500">
+          <TouchableOpacity
+            activeOpacity={0.9}
+            className="absolute right-10 top-20"
+            onPress={handleShowQRCode}
+          >
+            <FontAwesome name="close" size={26} color={colors.orange[500]} />
+          </TouchableOpacity>
+          <QRCode value="TESTE" size={300} />
+        </View>
+      </Modal>
     </View>
   )
 }
