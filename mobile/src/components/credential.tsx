@@ -9,15 +9,20 @@ import { Feather } from '@expo/vector-icons'
 
 import bandPng from '@/assets/ticket/band.png'
 import headerPng from '@/assets/ticket/header.png'
-import qrcodePng from '@/assets/ticket/qrcode.png'
+import { QRCode } from '@/components/qrcode'
 import colors from 'tailwindcss/colors'
 
 interface ICredential {
   image?: string
   onChangeAvatar?: () => void
+  onShowQRCode: () => void
 }
 
-export const Credential = ({ image, onChangeAvatar }: ICredential) => {
+export const Credential = ({
+  image,
+  onChangeAvatar,
+  onShowQRCode,
+}: ICredential) => {
   return (
     <View className="w-full items-center self-stretch">
       <Image source={bandPng} alt="Band Image" className="z-10 h-52 w-24" />
@@ -57,8 +62,13 @@ export const Credential = ({ image, onChangeAvatar }: ICredential) => {
           gui@email.com
         </Text>
 
-        <Image source={qrcodePng} alt="QR Code Image" className="h-32 w-32" />
-        <TouchableOpacity activeOpacity={0.9} className="mt-6">
+        <QRCode size={128} value="Qualquer coisa" />
+
+        <TouchableOpacity
+          activeOpacity={0.9}
+          className="mt-6"
+          onPress={onShowQRCode}
+        >
           <Text className="font-bold text-sm text-orange-500">
             Ampliar QRCode
           </Text>
