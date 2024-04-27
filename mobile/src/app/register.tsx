@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Alert, Image, Text, View } from 'react-native'
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons'
 import { Link, router } from 'expo-router'
 import colors from 'tailwindcss/colors'
@@ -7,22 +7,66 @@ import colors from 'tailwindcss/colors'
 import logo from '@/assets/logo.png'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
+import { api } from '@/services/api'
+import axios from 'axios'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [messageNameError, setMessageNameError] = useState('')
   const [messageEmailError, setMessageEmailError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleRegister = () => {
-    if (!name.trim()) {
-      return setMessageNameError('O campo nome é obrigátorio')
-    }
-    if (!email.trim()) {
-      return setMessageEmailError('O campo e-mail é obrigátorio')
-    }
+  const handleRegister = async () => {
+    try {
+      if (!name.trim()) {
+        return setMessageNameError('O campo nome é obrigátorio')
+      }
+      if (!email.trim()) {
+        return setMessageEmailError('O campo e-mail é obrigátorio')
+      }
+      setIsLoading(true)
 
-    router.push('/ticket')
+      const { data } = await api.post(
+        'events/clv21xmnd000014ijykhwdyvp/attendees',
+        {
+          name,
+          email,
+        },
+      )
+      if (data.attendee_id) {
+        Alert.alert('Inscrição', 'Inscrição realizada com sucesso', [
+          {
+            text: 'OK',
+            onPress: () => router.push('/ticket'),
+          },
+        ])
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (
+          String(error.response?.data.message).includes('already registered')
+        ) {
+          Alert.alert('Inscrição', 'Este e-mail já está cadastrado')
+        }
+
+        if (
+          String(error.response?.data.message).includes(
+            'event has been reached',
+          )
+        ) {
+          Alert.alert(
+            'Inscrição',
+            'Infelizmente não temos mais vagas disponiveis',
+          )
+        }
+      } else {
+        Alert.alert('Inscrição', 'não foi possível fazer a inscrição')
+        console.log('REGISTER_ERROR: ', error)
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -67,7 +111,11 @@ const Register = () => {
           <Text className="text-sm text-red-400">{messageEmailError}</Text>
         )}
 
-        <Button title="Realizar inscrição" onPress={handleRegister} />
+        <Button
+          title="Realizar inscrição"
+          onPress={handleRegister}
+          isLoading={isLoading}
+        />
         <Link
           href="/"
           className="mt-8 text-center font-bold text-base text-gray-100"
