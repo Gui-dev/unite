@@ -11,6 +11,7 @@ import {
 import { FontAwesome } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors'
 import * as ImagePicker from 'expo-image-picker'
+import { MotiView } from 'moti'
 
 import { Credential } from '@/components/credential'
 import { Header } from '@/components/header'
@@ -77,12 +78,18 @@ const Ticket = () => {
           onChangeAvatar={handleSelectImage}
           onShowQRCode={handleShowQRCode}
         />
-        <FontAwesome
-          name="angle-double-down"
-          color={colors.gray[300]}
-          size={24}
-          className="my-4 self-center"
-        />
+        <MotiView
+          from={{ translateY: 0 }}
+          animate={{ translateY: 10 }}
+          transition={{ type: 'timing', duration: 700, loop: true }}
+        >
+          <FontAwesome
+            name="angle-double-down"
+            color={colors.gray[300]}
+            size={24}
+            className="my-4 self-center"
+          />
+        </MotiView>
         <Text className="mt-4 font-bold text-2xl text-white">
           Compartilhar credencial
         </Text>
