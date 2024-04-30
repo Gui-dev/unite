@@ -11,15 +11,16 @@ import bandPng from '@/assets/ticket/band.png'
 import headerPng from '@/assets/ticket/header.png'
 import { QRCode } from '@/components/qrcode'
 import colors from 'tailwindcss/colors'
+import { IBadge } from '@/store/badge-store'
 
 interface ICredential {
-  image?: string
+  data: IBadge
   onChangeAvatar?: () => void
   onShowQRCode: () => void
 }
 
 export const Credential = ({
-  image,
+  data,
   onChangeAvatar,
   onShowQRCode,
 }: ICredential) => {
@@ -32,22 +33,24 @@ export const Credential = ({
           className="h-40 items-center self-stretch overflow-hidden border-b border-white/10 px-6 py-8"
         >
           <View className="w-full flex-row items-center justify-between">
-            <Text className="font-bold text-sm text-gray-50">Unite Summit</Text>
-            <Text className="font-bold text-sm text-gray-50">#1782790902</Text>
+            <Text className="font-bold text-sm text-gray-50">
+              {data.event_title}
+            </Text>
+            <Text className="font-bold text-sm text-gray-50">{data.id}</Text>
           </View>
           <View className="h-40 w-40 rounded-full bg-black" />
         </ImageBackground>
 
-        {image && (
+        {data.image && (
           <TouchableOpacity activeOpacity={0.9} onPress={onChangeAvatar}>
             <Image
-              source={{ uri: image }}
+              source={{ uri: data.image }}
               alt="Your image"
               className="-mt-24 h-36 w-36 rounded-full"
             />
           </TouchableOpacity>
         )}
-        {!image && (
+        {!data.image && (
           <TouchableOpacity
             activeOpacity={0.9}
             className="-mt-24 h-36 w-36 items-center justify-center rounded-full bg-gray-400"
@@ -57,12 +60,14 @@ export const Credential = ({
           </TouchableOpacity>
         )}
 
-        <Text className="mt-4 font-bold text-2xl text-gray-50">Gui Silva</Text>
+        <Text className="mt-4 font-bold text-2xl text-gray-50">
+          {data.name}
+        </Text>
         <Text className="mb-4 font-regular text-base text-gray-300">
-          gui@email.com
+          {data.email}
         </Text>
 
-        <QRCode size={128} value="Qualquer coisa" />
+        <QRCode size={128} value={data.check_in_url} />
 
         <TouchableOpacity
           activeOpacity={0.9}
