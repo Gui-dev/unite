@@ -1,20 +1,38 @@
-import { Image, Text, View } from 'react-native'
+import { Alert, Image, Text, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Link } from 'expo-router'
+import { Link, Redirect } from 'expo-router'
 import { useState } from 'react'
 import colors from 'tailwindcss/colors'
 
 import logo from '@/assets/logo.png'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
+import { api } from '@/services/api'
+import { useBadgeStore } from '@/store/badge-store'
 
 const App = () => {
   const [code, setCode] = useState('')
   const [message, setMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const { data, save } = useBadgeStore()
 
-  const handleAccessCredential = () => {
-    if (!code.trim()) {
-      return setMessage('Informe o código do ingresso')
+  if (data) {
+    return <Redirect href="/ticket" />
+  }
+
+  const handleAccessCredential = async () => {
+    try {
+      if (!code.trim()) {
+        return setMessage('Informe o código do ingresso')
+      }
+      setIsLoading(true)
+      const { data } = await api.get(`/attendees/${code}/badge`)
+      save(data.badge)
+      setIsLoading(false)
+    } catch (error) {
+      console.log('CREDENTIAL_ERROR: ', error)
+      setIsLoading(false)
+      Alert.alert('Ingresso', 'Ingresso não encontrado')
     }
   }
 
@@ -40,7 +58,11 @@ const App = () => {
           />
         </Input>
         {message && <Text className="text-sm text-red-400">{message}</Text>}
-        <Button title="Acessar credencial" onPress={handleAccessCredential} />
+        <Button
+          title="Acessar credencial"
+          onPress={handleAccessCredential}
+          isLoading={isLoading}
+        />
         <Link
           href="/register"
           className="mt-8 text-center font-bold text-base text-gray-100"
