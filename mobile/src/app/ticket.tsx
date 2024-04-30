@@ -15,10 +15,12 @@ import { Credential } from '@/components/credential'
 import { Header } from '@/components/header'
 import { Button } from '@/components/button'
 import { QRCode } from '@/components/qrcode'
+import { useBadgeStore } from '@/store/badge-store'
+import { Redirect } from 'expo-router'
 
 const Ticket = () => {
-  const [image, setImage] = useState('')
   const [showQRCode, setShowQRCode] = useState(false)
+  const { data, remove, update_avatar } = useBadgeStore()
 
   const handleSelectImage = async () => {
     try {
@@ -28,7 +30,7 @@ const Ticket = () => {
         aspect: [4, 4],
       })
       if (result.assets) {
-        setImage(result.assets[0].uri)
+        update_avatar(result.assets[0].uri)
       }
     } catch (error) {
       Alert.alert('Foto', 'Não foi possível selecionar a imagem')
@@ -40,6 +42,14 @@ const Ticket = () => {
     setShowQRCode(!showQRCode)
   }
 
+  const handleRemoveTicket = () => {
+    remove()
+  }
+
+  if (!data) {
+    return <Redirect href="/" />
+  }
+
   return (
     <View className="flex-1 bg-green-500">
       <Header title="Minha credencial" />
@@ -49,7 +59,7 @@ const Ticket = () => {
         showsVerticalScrollIndicator={false}
       >
         <Credential
-          image={image}
+          data={data}
           onChangeAvatar={handleSelectImage}
           onShowQRCode={handleShowQRCode}
         />
@@ -68,7 +78,11 @@ const Ticket = () => {
 
         <Button title="Compartilhar" />
 
-        <TouchableOpacity activeOpacity={0.9} className="mt-10">
+        <TouchableOpacity
+          activeOpacity={0.9}
+          className="mt-10"
+          onPress={handleRemoveTicket}
+        >
           <Text className="text-center font-bold text-base text-white">
             Remover ingresso
           </Text>
