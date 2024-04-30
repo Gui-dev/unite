@@ -3,6 +3,7 @@ import {
   Alert,
   Modal,
   ScrollView,
+  Share,
   Text,
   TouchableOpacity,
   View,
@@ -46,6 +47,19 @@ const Ticket = () => {
     remove()
   }
 
+  const handleShare = async () => {
+    try {
+      if (data) {
+        await Share.share({
+          message: data.check_in_url,
+        })
+      }
+    } catch (error) {
+      Alert.alert('Compartilhar', 'Não foi possível compartilhar!!!')
+      console.log(error)
+    }
+  }
+
   if (!data) {
     return <Redirect href="/" />
   }
@@ -76,7 +90,7 @@ const Ticket = () => {
           Mostre ao mundo que você vai participar!!!
         </Text>
 
-        <Button title="Compartilhar" />
+        <Button title="Compartilhar" onPress={handleShare} />
 
         <TouchableOpacity
           activeOpacity={0.9}
