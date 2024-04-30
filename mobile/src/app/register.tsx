@@ -9,6 +9,7 @@ import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { api } from '@/services/api'
 import axios from 'axios'
+import { useBadgeStore } from '@/store/badge-store'
 
 const Register = () => {
   const [name, setName] = useState('')
@@ -16,6 +17,7 @@ const Register = () => {
   const [messageNameError, setMessageNameError] = useState('')
   const [messageEmailError, setMessageEmailError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { save } = useBadgeStore()
 
   const handleRegister = async () => {
     try {
@@ -35,6 +37,10 @@ const Register = () => {
         },
       )
       if (data.attendee_id) {
+        const badgeResponse = await api.get(
+          `/attendees/${data.attendee_id}/badge`,
+        )
+        save(badgeResponse.data.badge)
         Alert.alert('Inscrição', 'Inscrição realizada com sucesso', [
           {
             text: 'OK',
@@ -42,7 +48,9 @@ const Register = () => {
           },
         ])
       }
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       if (axios.isAxiosError(error)) {
         if (
           String(error.response?.data.message).includes('already registered')
@@ -64,8 +72,6 @@ const Register = () => {
         Alert.alert('Inscrição', 'não foi possível fazer a inscrição')
         console.log('REGISTER_ERROR: ', error)
       }
-    } finally {
-      setIsLoading(false)
     }
   }
 
