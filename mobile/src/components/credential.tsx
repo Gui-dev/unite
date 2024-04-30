@@ -4,8 +4,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import { MotiView } from 'moti'
 
 import bandPng from '@/assets/ticket/band.png'
 import headerPng from '@/assets/ticket/header.png'
@@ -24,8 +26,30 @@ export const Credential = ({
   onChangeAvatar,
   onShowQRCode,
 }: ICredential) => {
+  const { height } = useWindowDimensions()
   return (
-    <View className="w-full items-center self-stretch">
+    <MotiView
+      className="w-full items-center self-stretch"
+      from={{
+        opacity: 1,
+        translateY: -height,
+        rotateZ: '50deg',
+        rotateX: '30deg',
+        rotateY: '30deg',
+      }}
+      animate={{
+        opacity: 1,
+        translateY: 0,
+        rotateZ: '0deg',
+        rotateX: '0deg',
+        rotateY: '0deg',
+      }}
+      transition={{
+        type: 'spring',
+        damping: 20,
+        rotateZ: { damping: 15, mass: 3 },
+      }}
+    >
       <Image source={bandPng} alt="Band Image" className="z-10 h-52 w-24" />
       <View className="mx-3 -mt-5 items-center self-stretch rounded-2xl border border-white/10 bg-black/10 pb-6">
         <ImageBackground
@@ -79,6 +103,6 @@ export const Credential = ({
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </MotiView>
   )
 }
