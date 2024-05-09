@@ -2,7 +2,7 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-  "title": 123,
+  "title": "Título de Teste",
   "details": "Esse evento é só para um participante 😂",
   "maximum_attendees": 1
 }

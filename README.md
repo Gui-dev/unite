@@ -1,8 +1,8 @@
 <p align="center">
-  <img alt="Speech Notes Logo" src="./.screens/cover.png" width="100%">
+  <img alt="Pass in" src="./.screens/cover.png" width="100%">
 </p>
 
-# Descrição do Projeto
+# Pass in
 
 Este projeto é uma aplicação Full Stack que utiliza Node.js no backend para gerenciar cadastros de usuários, React na web para listar usuários com paginação e React Native no mobile para cadastro de usuários e geração de tickets virtuais.
 
@@ -11,13 +11,13 @@ Este projeto é uma aplicação Full Stack que utiliza Node.js no backend para g
 ### [Backend](https://github.com/Gui-dev/unite/tree/main/backend)
 
 - Node.js
-- Express.js
+- Fastify
 - Banco de dados (PostgreSQL)
+- Swagger (para documentação)
 
 ### [Web](https://github.com/Gui-dev/unite/tree/main/frontend)
 
-- React
-- React Router
+- React (NextJS)
 - Axios
 
 ### [Mobile](https://github.com/Gui-dev/unite/tree/main/mobile)
