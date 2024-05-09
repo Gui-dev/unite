@@ -27,6 +27,7 @@ export const Credential = ({
   onShowQRCode,
 }: ICredential) => {
   const { height } = useWindowDimensions()
+
   return (
     <MotiView
       className="w-full items-center self-stretch"
@@ -60,7 +61,7 @@ export const Credential = ({
             <Text className="font-bold text-sm text-gray-50">
               {data.event_title}
             </Text>
-            <Text className="font-bold text-sm text-gray-50">{data.id}</Text>
+            <Text className="font-bold text-sm text-gray-50">#{data.id}</Text>
           </View>
           <View className="h-40 w-40 rounded-full bg-black" />
         </ImageBackground>

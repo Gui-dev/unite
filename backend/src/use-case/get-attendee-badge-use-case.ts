@@ -27,6 +27,7 @@ export class GetAttendeeBadgeUseCase {
     )
 
     const attendee = {
+      id: attendee_result.id,
       name: attendee_result.name,
       email: attendee_result.email,
       event_title: attendee_result.event.title,

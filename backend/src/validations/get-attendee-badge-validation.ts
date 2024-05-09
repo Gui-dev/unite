@@ -6,6 +6,7 @@ export const getAttendeeBadgeValidation = z.object({
 
 export const getAttendeeBadgeValidationResponse = z.object({
   badge: z.object({
+    id: z.number().int(),
     name: z.string(),
     email: z.string().email(),
     event_title: z.string(),
