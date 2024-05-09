@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pass.in
 
-## Getting Started
+No app Web listará todos os usuários cadastrados no evento, listando 10 usuários por página,
+e ainda você pode fazer a busca de um usuário por nome.
 
-First, run the development server:
+## ✨ Technologies used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- React
+- Next.js
+- Páginação
+
+**Screens**
+
+<p align="center">
+  <img alt="Speech Notes Home" src="./.screens/home.png" width="100%">
+  <img alt="Speech Notes New Note" src="./.screens/pagination.png" width="100%">
+</p>
+
+**Pré-requisitos:**
+
+- Navegador web moderno (Chrome, Edge, etc.)
+- NodeJS
+
+**Instalação e Execução:**
+
+1.  Clone o repositório:
+
+Bash
+
+```
+git clone https://github.com/Gui-dev/projects-expert.git
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4.  Execute a aplicação:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Bash
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+npm ci
+```
 
-## Learn More
+Bash
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5.  Acesse a aplicação em http://localhost:3000 no seu navegador.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Contribuição:**
 
-## Deploy on Vercel
+Agradecemos a sua contribuição para este projeto! Você pode contribuir submetendo issues e pull requests no repositório GitHub.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Licença:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Este projeto está licenciado sob a licença MIT.
